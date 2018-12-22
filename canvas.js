@@ -22,7 +22,7 @@ let palettes = {
 
 let randomPalette = randomProperty(palettes);
 
-let trans = 0.11;
+
 
 /* write stuff
 
@@ -74,6 +74,7 @@ then we get randomly generate palettes whose colours are more closely or distant
 
 // ***** create a random palette!
 
+let trans = Math.random();
 let randomRGBpalette = [];
 let randomRGBapalette = [];
 let randomMax = Math.floor(Math.random()*256); // this is also the range
@@ -87,9 +88,13 @@ for (let i = 0; i < numberOfCircles; i++) {
 	let inverseStaggered = randomMin + randomMax - (i*Math.round((randomMax/(numberOfCircles-1))));
 	let rVal; let gVal; let bVal;
 	// now assign values // Math.floor(Math.random()*256);
-	rVal = staggeredColorFromRange; // change to a number for shades of that colour.
-	gVal = Math.floor(Math.random()*100); // higher vals are more prominent
-	bVal = 33; // inverseStaggered;
+		// cool settings
+		let rRusty = staggeredColorFromRange;
+		let gRusty = Math.floor(Math.random()*100);
+		let bRusty = 33;
+	rVal = rRusty;
+	gVal = gRusty;
+	bVal = bRusty; // inverseStaggered;
 	let randomRGB = `rgb(${rVal}, ${gVal}, ${bVal})`;
 	let randomRGBa = `rgba(${rVal}, ${gVal}, ${bVal}, ${trans})`;
 	randomRGBpalette.push(randomRGB);
