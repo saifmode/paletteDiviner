@@ -137,32 +137,14 @@ c.stroke(); */
 
 // random palette generator! generate coherent patterns by making small but random changes
 // across 2 or fewer colors in the RGB array
-// how to make the radius such that no matter what number of circles generated
-// the circles fill the screen top to bottom
-// we want the circles to start small then go big
-// should enlarge via the golden ratio
-// so if we had two circles of radii a and b, then a + b / a should equal 1.62... etc
-// so if screen was 500px high
-/* 
 
-500 / a = 1.62 bla
-so a = 500/ 1.62
-as a/b = 1.62
-implies a/1.62 = b
-b = (500/1.62^2)
 
-let phiA = innerHeight / phi;
-let phiB = innerHeight / phi / phi;
-
+/* fibonacci arc
 
 
 
 
 */
-
-// Arcs
-
-
 // *** FIBONACCI ARCS 
 let whereTextStarts = innerHeight / phi;
 
@@ -171,13 +153,29 @@ for (let j = 0; j < numberOfSpawns; j++) {
 
 	for (let i = 1; i < numberOfCircles + 1; i++) {
 		// *** cool settings
-		let randomColor = randomRGBapalette[Math.floor(Math.random()*randomRGBpalette.length)];
-		let staggeredColor = randomRGBapalette[i - 1];
-		c.fillStyle = staggeredColor; // < ^ are for filling the circle
-		let radius = (innerHeight*phi - innerHeight) / Math.pow(phi, i);
-		// let radius = 5*i; // set <= y to avoid overlaps on the y axis
-		let x = Math.random()*innerWidth;
-		let y = radius;
+			// Fibonacci sequence
+			let xFibonacci = Math.random()*innerWidth;
+			let radiusFibonacci = (innerHeight*phi - innerHeight) / Math.pow(phi, i);
+			let yFibonacci = radiusFibonacci;
+			// MultiMesc (requires j loop additions)
+			let radiusMultimesc = 30*(i/4);
+			let xMultimesc = (Math.floor(Math.random()*150)+50)*i;
+			let yMultimesc = (Math.floor(Math.random()*20)+7)*i*i;
+			// spawn at random points
+			let xRandom = Math.random()*innerWidth; // spawns curve at random x
+			let yRandom = Math.random()*innerHeight;// spawns curve at random y
+			// just generates a pos or neg number, if you need it
+			let xDirRand = 2*(Math.floor(Math.random()*2)-0.5); // posi or negi
+			let yDirRand = 2*(Math.floor(Math.random()*2)-0.5); // posi or negi
+			// color settings
+			let fromTransparentPalette = randomRGBapalette[i - 1];
+			let fromBoldPalette = randomRGBpalette[i - 1];
+		// load a colour
+		c.fillStyle = fromTransparentPalette;
+		// circle shape and position
+		let radius = radiusMultimesc
+		let x = xRandom
+		let y = yRandom
 		c.beginPath();
 		c.arc(x, y, radius, 0, Math.PI * 2, true);
 		c.fill();
@@ -185,8 +183,7 @@ for (let j = 0; j < numberOfSpawns; j++) {
 }
 
 
-
-
+/*
 // *** multicolored balls forming a top-right quadrant parabola
 
 for (let j = 0; j < 11; j++) { // j < n, where n is number of curves
@@ -202,14 +199,13 @@ for (let j = 0; j < 11; j++) { // j < n, where n is number of curves
 		let radius = 30*(i/4);
 		let x = ixRand*i;
 		let y = iyRand*i*i;
-		console.log(x, y);
 		c.fillStyle = randomColor;
 		c.beginPath();
 		c.arc(x -66, y -66, radius, 0, Math.PI * 2, true);
 		c.fill();
 	}
 }
-
+*/
 
 
 /* bin of linear relationships
@@ -251,7 +247,7 @@ var cy = whereTextStarts + (whereTextStarts/3);
 
 c.font = "italic bold 30px Times New Roman";
 c.fillStyle = randomRGBpalette[randomRGBpalette.length-3];
-wrapText(c, `P A L E T T E - D I V I N E R`, cx, cy, maxWidth, lineHeight);
+wrapText(c, `P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - `, cx, cy, maxWidth, lineHeight);
 
 // wrapText(c, `Array: ${randomRGBpalette}`, cx, cy, maxWidth, lineHeight);
 
