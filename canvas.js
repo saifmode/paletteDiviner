@@ -118,7 +118,9 @@ for (let i = 0; i < numberOfCircles; i++) {
 					${staggeredColorFromRange},
 					${inverseStaggered},
 					${100},
-					${33})` 
+					${33})`,
+
+			text: `D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ `, 
 			},
 
 		Rusty: {
@@ -285,10 +287,10 @@ var lineHeight = 60;
 var cx = (canvas.width - maxWidth) / 2;
 var cy = whereTextStarts + (whereTextStarts/3);
 
-
+let bottomText = `D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ `;
 c.font = "italic bold 30px Times New Roman";
 c.fillStyle = randomRGBpalette[randomRGBpalette.length-3];
-wrapText(c, `P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - P A L E T T E - D I V I N E R - `, cx, cy, maxWidth, lineHeight);
+wrapText(c, bottomText, cx, cy, maxWidth, lineHeight);
 
 // wrapText(c, `Array: ${randomRGBpalette}`, cx, cy, maxWidth, lineHeight);
 
