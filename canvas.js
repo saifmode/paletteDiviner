@@ -84,9 +84,7 @@ for (let i = 0; i < numberOfCircles; i++) {
 					${staggeredColorFromRange},
 					${inverseStaggered},
 					${100},
-					${33})`,
-
-			text: `D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ `, 
+					${33})`
 			},
 		Rusty: {
 			trans: `rgba(
@@ -155,7 +153,7 @@ let randomText = [
 			`S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ `,
 			`P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ `,
 			`B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ `,
-			`O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~O N L Y ~ L O V E ~ B E A U T Y ~`,
+			`O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ `,
 			]
 let bottomText = randomText[Math.floor(Math.random()*randomText.length)];
 c.font = "italic bold 30px Times New Roman";
