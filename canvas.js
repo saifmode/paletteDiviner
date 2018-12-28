@@ -3,11 +3,16 @@
 let canvas = document.querySelector('canvas');
 let c = canvas.getContext('2d');
 
+// screen settings
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+c.fillStyle = 'black' //randomPalette[randomPalette.length-1]// change to this if u want random colour randomPalette[0];
+c.fillRect(0,0,canvas.width, canvas.height);
+
 // functions
 let randomProperty = (obj) => {
     const keys = Object.keys(obj)
-    return obj[keys[ keys.length * Math.random() << 0]];
-};
+    return obj[keys[ keys.length * Math.random() << 0]];};
 
 // WRAP TEXT FUNCTION
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
@@ -34,24 +39,14 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
 const phi = (1 + Math.sqrt(5)) / 2;
 const goldenRatioHeight = innerHeight / phi;
 
-// *** Chef's specials ***
-let palettes = {
-	ViolentSilence: ['#5c1c56', '#811e6e', '#ab3789', '#b85180', '#d26a89'],
-	VisionsOfSugarPlums: ['#c99bd2', '#dbb1ea', '#eed0ff', '#f4daee', 'fbd3e9'],
-	Puebla: ['#ff6b6b', '#e8f962', '#82ddd1', '#f9d171', '6cf289'],
-	Fred: ["#b888bc", "#4c5a8a", "#82566c", "#6e95c2", "#7f4881"],
-	MacDaddy: ["#c380aa","#5a9fcf","#894370","#3b5d7a","#9b8cce","#725466","#496caa","#8c8fab","#674c90","#5d537e"]
-	}
-let randomPalette = randomProperty(palettes);
-
 // ***** create a random palette from scratch!
-let trans = Math.random();
+let trans = 0.02;
 let randomRGBpalette = [];
 let randomRGBapalette = [];
 let randomMax = Math.floor(Math.random()*256); // the range
 let randomMin = Math.floor(Math.random()*(256-randomMax)); // where on the scale we start
-let numberOfCircles = Math.floor(Math.random()*20) + 5; // number of circles also determines size of palette
-let numberOfSpawns = Math.floor(Math.random()*10) + 31;
+let numberOfCircles = Math.floor(Math.random()*100) + 31; // number of circles also determines size of palette
+	// let numberOfSpawns = Math.floor(Math.random()*10) + 31;
 for (let i = 0; i < numberOfCircles; i++) {
 	// *** cool settings
 	let randomColorFromRange = randomMin + Math.floor(Math.random()*randomMax);
@@ -78,8 +73,6 @@ for (let i = 0; i < numberOfCircles; i++) {
 					${staggeredColorFromRange},
 					${staggeredColorFromRange},
 					${trans})`,
-				
-				
 			bold: 	`rgb(
 					${staggeredColorFromRange},
 					${staggeredColorFromRange},
@@ -91,8 +84,6 @@ for (let i = 0; i < numberOfCircles; i++) {
 					${'green'},
 					${'blue'},
 					${trans})`,
-				
-				
 			bold: 	`rgb(
 					${0},
 					${0},
@@ -138,66 +129,141 @@ for (let i = 0; i < numberOfCircles; i++) {
 					${Math.floor(Math.random()*256)},
 					${Math.floor(Math.random()*256)})` 
 			}
-
 		};
-	randomRGBpalette.push(themes.LightGrey.bold); // just push randomPalette if you want a set theme
-	randomRGBapalette.push(themes.LightGrey.trans);
+	randomRGBpalette.push(themes.Ice.bold); // just push randomPalette if you want a set theme
+	randomRGBapalette.push(themes.Ice.trans); // THEME GOES HERE!
 }
 
+// Circle generator function
+function Circle(x ,y, dx, dy, radius, randomColor, maxRadius, minRadius) {
+	this.x = x;
+	this.y = y;
+	this.dx = dx;
+	this.dy = dy;
+	this.radius = radius;
+	this.randomColor = randomColor;
+	this.maxRadius = maxRadius;
+	this.minRadius = minRadius;
 
+	this.update = function() {
+		//collision detection
+		if (this.x + this.radius > innerWidth || this.x - this.radius < 0) {
+			this.dx = -this.dx;
+		}
+		if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
+			this.dy = -this.dy;
+		}
+		// keep in motion
+		this.x += this.dx;
+		this.y += this.dy;
 
-// screen settings
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-c.fillStyle = 'black' //randomPalette[randomPalette.length-1]// change to this if u want random colour randomPalette[0];
-c.fillRect(0,0,canvas.width, canvas.height);
+		// interactivity
+		// if (mouse.x - this.x < 50 && mouse.x - this.x > -50
+		// 	&& mouse.y - this.y < 50 && mouse.y - this.y > -50 
+		// 	) {
+		// 	if (this.radius < this.maxRadius) {
+		// 	this.radius +=1;
+		// 	}
+		// } else 
+		if (this.radius > this.minRadius) {
+			this.radius -=1;
+			
+		}
 
-
-// draw the circles 
-for (let j = 0; j < numberOfSpawns; j++) {
-	for (let i = 1; i < numberOfCircles + 1; i++) {
-		// *** cool settings - make this object
-			// Fibonacci sequence
-			let xFibonacci = Math.random()*innerWidth;
-			let radiusFibonacci = (innerHeight*phi - innerHeight) / Math.pow(phi, i);
-			let yFibonacci = radiusFibonacci;
-			// MultiMesc (requires j loop additions)
-			let radiusMultimesc = 30*(i/4);
-			let xMultimesc = (Math.floor(Math.random()*150)+50)*i;
-			let yMultimesc = (Math.floor(Math.random()*20)+7)*i*i;
-			// spawn at random points
-			let xRandom = Math.random()*innerWidth; // spawns curve at random x
-			let yRandom = Math.random()*innerHeight;// spawns curve at random y
-			// just generates a pos or neg number, if you need it
-			let xDirRand = 2*(Math.floor(Math.random()*2)-0.5); // posi or negi
-			let yDirRand = 2*(Math.floor(Math.random()*2)-0.5); // posi or negi
-			// color settings
-		// load a colour
-		c.fillStyle = randomRGBapalette[i - 1]
-		// circle shape and position
-		let radius = radiusMultimesc
-		let x = xRandom
-		let y = yRandom
+		//draw
+		c.fillStyle = this.randomColor;
+		c.strokeStyle = 'white';
 		c.beginPath();
-		c.arc(x, y, radius, 0, Math.PI * 2, true);
+		c.arc(this.x, this.y, this.radius, Math.PI * 2, false);
 		c.fill();
 	}
 }
 
-// text wrap
-var maxWidth = innerWidth;
-var lineHeight = 60;
-var cx = (canvas.width - maxWidth) / 2;
-var cy = goldenRatioHeight + goldenRatioHeight/3;
+// create a circle
+// random circle variables
+let styleArray = [];
+let circleArray = [];
+for (let i = 0; i < numberOfCircles; i++) {
+	let radius = Math.random()*120 + 13;
+	let x = Math.random()*(innerWidth - radius * 2) + radius; // random starting xpos
+	let y = Math.random()*(innerHeight - radius * 2) + radius; // random starting ypos
+	let dx = ((Math.random() - 0.5) * 50) / (radius / 2); // random x velocity
+	let dy = ((Math.random() - 0.5) * 50) / (radius / 2); // random y velocity
+	let minRadius = 1 // radius - (radius/2);
+	let maxRadius = 133;
+	let randomColor = randomRGBapalette[i]
+	circleArray.push(new Circle(x, y, dx, dy, radius, randomColor, maxRadius, minRadius));
+}
+console.log(circleArray);
 
-let randomText = [
-			`D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~`,
-			`S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ `,
-			`P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ `,
-			`B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ `,
-			`O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ `,
-			]
-let bottomText = randomText[Math.floor(Math.random()*randomText.length)];
-c.font = "italic bold 30px Times New Roman";
-c.fillStyle = randomRGBpalette[randomRGBpalette.length-3];
-wrapText(c, bottomText, cx, cy, maxWidth, lineHeight);
+// Text stuff
+	var maxWidth = innerWidth;
+	var lineHeight = 60;
+	var cx = (canvas.width - maxWidth) / 2;
+	var cy = goldenRatioHeight + goldenRatioHeight/3;
+
+	let randomText = [
+				`D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~ D E E P ~ M E M E ~ LAYERS ~`,
+				`S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ S A I F ~ M O D E ~ `,
+				`P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ P A L E T T E ~ D I V I N E R ~ `,
+				`B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ B I C A M E R A L ~ A G A I N ~ W H E N ~ `,
+				`O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ O N L Y ~ L O V E ~ B E A U T Y ~ `,
+				]
+	let bottomText = randomText[Math.floor(Math.random()*randomText.length)];
+	c.font = "italic bold 30px Times New Roman";
+
+// event listening
+/*
+let mouse = {
+	x: undefined,
+	y: undefined
+}
+window.addEventListener('mousemove',
+	function(event) {
+		mouse.x = event.x;
+		mouse.y = event.y;
+		console.log(mouse);
+})
+*/
+window.addEventListener('resize',
+	function() {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		init();
+	}
+)
+
+
+function init() {
+	circleArray = [];
+	for (let i = 0; i < numberOfCircles; i++) {
+		let radius = Math.random()*120 + 13;
+		let x = Math.random()*(innerWidth - radius * 2) + radius; // random starting xpos
+		let y = Math.random()*(innerHeight - radius * 2) + radius; // random starting ypos
+		let dx = ((Math.random() - 0.5) * 50) / (radius / 2); // random x velocity
+		let dy = ((Math.random() - 0.5) * 50) / (radius / 2); // random y velocity
+		let minRadius = 1 // radius - (radius/2);
+		let maxRadius = 133;
+		let randomColor = randomRGBapalette[i]
+		circleArray.push(new Circle(x, y, dx, dy, radius, randomColor, maxRadius, minRadius));
+	}
+}
+
+// animation
+const animate = () => {
+	requestAnimationFrame(animate);
+
+	c.fillRect(0, 0, canvas.width, canvas.height); // cls
+
+	for (let i = 0; i < circleArray.length; i++) {
+		circleArray[i].update();
+	}
+
+	wrapText(c, bottomText, cx, cy, maxWidth, lineHeight);
+
+}
+
+
+
+
+animate();
